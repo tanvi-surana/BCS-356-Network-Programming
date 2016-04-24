@@ -22,15 +22,17 @@ void str_echo(int sockfd)
 
     char sendline[100];
     char recvline[100];
-    while(1)
+    while(fgets(sendline,100,stdin)!=NULL)
     {
-        bzero( sendline, 100);
-        bzero( recvline, 100);
-        fgets(sendline,100,stdin); /*stdin = 0 , for standard input */
+        
+        //fgets(sendline,100,stdin); /*stdin = 0 , for standard input */
  
-        write(sockfd,sendline,strlen(sendline)+1);
+        //send(sockfd,sendline,strlen(sendline)+1,0);
+        write(sockfd,sendline,strlen(sendline)+1);/*send and write behave in the same way,just the flag argument is set to 0*/
         read(sockfd,recvline,100);
         printf("%s",recvline);
+        bzero( sendline, 100);
+        bzero( recvline, 100);
     }
  
 
